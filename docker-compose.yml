@@ -1,0 +1,17 @@
+version: "3"
+services:
+  schedule-server:
+    image: schedule-server:0.3
+    container_name: schedule-server
+    ports:
+    - "8764:8764"
+    command: node app.js
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "5"
+    volumes:
+      - "./.env:/app/.env"
+      - "./log:/var/log"
+    restart: on-failure
